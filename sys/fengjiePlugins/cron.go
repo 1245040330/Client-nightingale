@@ -32,25 +32,33 @@ func loopDetect() {
 }
 
 func detect() {
+	conf:=config.GetYaml()
+	if(conf.Pgsql.Dbname!=""){
+		//pg数据获取
+		resPg,err:=pgsqlInfo.SqlInfo()
+		if err!=nil{
+			config.Error.Println(err)
+		}
+		config.Info.Println("pg数据提交返回\n"+resPg)
+	}
+	if(conf.Redis.Addr!=""){
+		//redis数据获取
+		resRedis,err:=redisInfo.RedisInfo()
+		if err!=nil{
+			config.Error.Println(err)
+		}
+		config.Info.Println("redis数据提交返回\n"+resRedis)
+	}
+	if(conf.NginxStatus!=""){
+		//nginx 获取数据
+		resNginx,err:=nginxInfo.NginxInfo()
+		if err!=nil{
+			config.Error.Println(err)
+		}
+		config.Info.Println("nginx数据提交返回\n"+resNginx)
+	}
 
-	//pg数据获取
-	resPg,err:=pgsqlInfo.SqlInfo()
-	if err!=nil{
-		config.Error.Println(err)
-	}
-	config.Info.Println("pg数据提交返回\n"+resPg)
-	//redis数据获取
-	resRedis,err:=redisInfo.RedisInfo()
-	if err!=nil{
-		config.Error.Println(err)
-	}
-	config.Info.Println("redis数据提交返回\n"+resRedis)
-	//nginx 获取数据
-	resNginx,err:=nginxInfo.NginxInfo()
-	if err!=nil{
-		config.Error.Println(err)
-	}
-	config.Info.Println("nginx数据提交返回\n"+resNginx)
+
 }
 
 func aconf() string{

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/didi/nightingale/src/modules/collector/sys/apiTest"
 	"github.com/didi/nightingale/src/modules/collector/sys/fengjiePlugins"
 	"log"
 	"os"
@@ -81,6 +82,8 @@ func main() {
 	funcs.Collect()
 	//自定义插件采集
 	fengjiePlugins.Detect()
+
+	apiTest.Detect()
 
 	//插件采集
 	plugins.Detect()

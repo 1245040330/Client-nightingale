@@ -1,7 +1,6 @@
 package funcs
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -50,7 +49,6 @@ func collect(sec int64, fn func() []*dataobj.MetricValue) {
 			item.Timestamp = now
 			metricValues = append(metricValues, item)
 		}
-		fmt.Println(metricValues[0].Metric)
 		Push(metricValues)
 	}
 }
